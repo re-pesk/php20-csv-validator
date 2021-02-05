@@ -1,0 +1,21 @@
+.unrounded-left {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.unrounded-right {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.unrounded {
+    border-radius: 0 !important;
+}
+
+.csv-col {
+    min-height: 2rem;
+}
+
+.w-10r {
+    width: 10rem;
+}

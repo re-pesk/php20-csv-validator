@@ -197,7 +197,7 @@ function checkValues(recordSet, parameters) {
         const fieldStr = replaceNl[Symbol.replace](field[0][0], replacer);
         const endStr = replaceNl[Symbol.replace](field[3][0], replacer);
         throw new TypeError(
-          `Record #${recordNo}, field #${fieldNo}: '${fieldStr}' has invalid end '${endStr}' at position ${field[3][1]}!`,
+          `Record #${recordNo}, field #${fieldNo}:\n'${fieldStr}' has an invalid part '${endStr}' at position ${field[3][1]}!`,
         );
       }
     });

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="content-language" content="en">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="libs/json-formatter/dist/json-formatter.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>CSV validator</title>
+    </head>
+
+    <body class="vh-100">
+        <div class="container-fluid h-100 d-flex flex-column">
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">CSV validator</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="btn nav-item">
+                                    <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarToggleFileData" aria-controls="navbarToggleFileData" aria-expanded="false" aria-label="Toggle navigation" href="#">File</a>
+                                </li>
+                                <li class="btn nav-item">
+                                    <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarToggleOptions" aria-controls="navbarToggleOptions" aria-expanded="false" aria-label="Toggle navigation" href="#">Preferences</a>
+                                </li>
+                                <li class="btn nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Help
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Reference</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">About</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="collapse" id="navbarToggleFileData">
+                    <div class="bg-dark p-4">
+                        <h5 class="text-white h4">File loading</h5>
+                        <span class="text-muted">Import CSV data</span>
+                        <div class="my-2 d-flex">
+                            <label class="text-nowrap btn btn-outline-secondary unrounded-right" for="selected-file-name">
+                                <input id="selected-file-name" name="selected-file-name" type="file" class="d-none">
+                                Select file
+                            </label>
+                            <input id="displayed-file-name" class="col-4 text-secondary unrounded" type="text" readonly>
+                            <button id="clear-data" class="py-0 px-1 fs-4 unrounded-left btn btn-outline-secondary d-none" type="button"><i class="bi bi-x"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="navbarToggleOptions">
+                    <div class="bg-dark p-4">
+                        <h5 class="text-white h4">Preferences</h5>
+                        <span class="text-muted">CSV validation preferences</span>
+                        <form name="parameters" class="my-2 d-flex flex-column">
+                            <!-- hasHeader: false,
+                            convertToNull: false,
+                            convertToNumber: false,
+                            preserveEmptyLine: false,
+                            ignoreInvalidChars: false, -->
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="has-header" value="hasHeader" checked>
+                                <label class="form-check-label text-white" for="turi-antrastes">Data include header</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="convert-to-null" value="convertToNull">
+                                <label class="form-check-label text-white" for="turi-antrastes">Convert empty fields to null</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="convert-to-number" value="convertToNumber">
+                                <label class="form-check-label text-white" for="turi-antrastes">Convert text to numbers if possible</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="preserve-empty-line" value="preserveEmptyLine" checked>
+                                <label class="form-check-label text-white" for="turi-antrastes">Preserve last empty line</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="ignore-invalid-chars" value="ignoreInvalidChars" checked>
+                                <label class="form-check-label text-white" for="turi-antrastes">Ignore invalid characters</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-grow-1 d-flex flex-column">
+                <ul class="nav nav-tabs" id="pages" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="dataset-tab" data-bs-toggle="tab" href="#dataset" role="tab" aria-controls="dataset" aria-selected="true">Validation datasets</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link disabled" id="csvtable-tab" data-bs-toggle="tab" href="#csvtable" role="tab" aria-controls="csvtable" aria-disabled="true" aria-selected="false">CSV dataset</a>
+                    </li>
+                </ul>
+                <div class="tab-content flex-grow-1" id="pagesContent">
+                    <div class="tab-pane fade show active h-100" id="dataset" role="tabpanel" aria-labelledby="dataset-tab">
+                        <textarea id="file-content" class="h-100 w-100 form-control"></textarea>
+                    </div>
+                    <div class="tab-pane fade h-100 d-flex" id="csvtable" role="tabpanel" aria-labelledby="csvtable-tab">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#resultmenu" aria-controls="resultmenu" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="resultmenu">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="btn nav-item">
+                                            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarToggleDataSets" aria-controls="navbarToggleDataSets" aria-expanded="false" aria-label="Toggle navigation" href="#">File</a>
+                                        </li>
+                                        <li class="btn nav-item">
+                                            <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#navbarToggleCsvTable" aria-controls="navbarToggleCsvTable" aria-expanded="false" aria-label="Toggle navigation" href="#">Preferences</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                        <div class="collapse" id="navbarToggleDataSets">
+                            <div class="bg-dark p-4">
+                                <h5 class="text-white h4">Validation data set</h5>
+                                <span class="text-muted">Data about validation process</span>
+                                <div class="my-2 d-flex">
+                                    <div id="parser-preferences"></div>
+                                    <div id="record-set"></div>
+                                    <div id="validation-messages"></div>
+                                    <div id="data-tree"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse" id="navbarToggleCsvTable">
+                            <div class="bg-dark p-4">
+                                <h5 class="text-white h4">Preferences</h5>
+                                <span class="text-muted">CSV validation preferences</span>
+                                <div id="validation-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <div class="row my-3">
+                    <div class="col p-2  d-flex justify-content-center"><span class="mx-auto">&copy; 2021 Rėdas Peškaitis</span></div>
+                </div>
+            </footer>
+        </div>
+        <script type="module" src="./js/main.js"></script>
+    </body>
+
+</html>
