@@ -4,14 +4,14 @@
 const LS_KEY = 'csv-validator';
 
 // Parseris
-import CsvParser from '../libs/csv-js/src/CsvParser.js';
+import CsvParser from '../lib/csv-js/src/CsvParser.js';
 
 // Saugyklos manageris
 import LocalStorageManager from './LocalStorageManager.js';
 const storage = new LocalStorageManager(LS_KEY);
 
 // JSONo formatavimo įrankis
-import JSONFormatter from '../libs/json-formatter/dist/json-formatter.esm.js';
+import JSONFormatter from '../lib/json-formatter/dist/json-formatter.esm.js';
 
 // Elementai, kuriuose saugomas failo duomenų objektas, rodomas failo pavadinimas
 // ir failo turinys
@@ -129,7 +129,6 @@ const analyzeContent = (content) => {
   outValidationMessages.innerHTML += `<p>${validation}</p>`;
 
   // Laukų reikšmių tikrinimas
-
   try {
     csvParser.checkValues(recordSet);
     validation = `Values of the recordSet are valid`;
@@ -141,7 +140,6 @@ const analyzeContent = (content) => {
   outValidationMessages.innerHTML += `<p>${validation.replaceAll(/\n/g, '<br />')}</p>`;
 
   // CSV duomenų medžio  generavimas
-
   const dataTree = csvParser.recordsToDataTree(recordSet);
 
   outDataTree.innerHTML = `<h3>Valid data tree</h3`;
@@ -150,7 +148,6 @@ const analyzeContent = (content) => {
   );
 
   // CSV lentelės generavimas
-
   const recordsTable = createRecordsTable(recordSet);
   outValidationResult.innerHTML = recordsTable;
 
@@ -238,8 +235,6 @@ const onContentInput = () => {
 }
 
 btnClearData.addEventListener('click', clearData)
-
 tabValidation.addEventListener('click', validateData);
-
 selectedFileName.addEventListener('change', displayFileName);
 fileContent.addEventListener('input', onContentInput);
