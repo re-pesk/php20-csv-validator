@@ -11,7 +11,7 @@ import LocalStorageManager from './LocalStorageManager.js';
 const storage = new LocalStorageManager(LS_KEY);
 
 // JSONo formatavimo įrankis
-import JSONFormatter from '../lib/json-formatter/dist/json-formatter.esm.js';
+import JSONFormatter from '../vendor/json-formatter/dist/json-formatter.esm.js';
 
 // Elementai, kuriuose saugomas failo duomenų objektas, rodomas failo pavadinimas
 // ir failo turinys
